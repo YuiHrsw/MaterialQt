@@ -33,6 +33,21 @@ class MaterialColorGenerator : public QObject {
     Q_PROPERTY(QColor background READ background NOTIFY colorsChanged)
     Q_PROPERTY(QColor onBackground READ onBackground NOTIFY colorsChanged)
 
+    // Additional Material color properties
+    Q_PROPERTY(QColor surfaceVariant READ surfaceVariant NOTIFY colorsChanged)
+    Q_PROPERTY(QColor onSurfaceVariant READ onSurfaceVariant NOTIFY colorsChanged)
+    Q_PROPERTY(QColor inverseSurface READ inverseSurface NOTIFY colorsChanged)
+    Q_PROPERTY(QColor inverseOnSurface READ inverseOnSurface NOTIFY colorsChanged)
+    Q_PROPERTY(QColor outline READ outline NOTIFY colorsChanged)
+    Q_PROPERTY(QColor outlineVariant READ outlineVariant NOTIFY colorsChanged)
+    Q_PROPERTY(QColor surfaceTint READ surfaceTint NOTIFY colorsChanged)
+    Q_PROPERTY(QColor inversePrimary READ inversePrimary NOTIFY colorsChanged)
+
+    Q_PROPERTY(QColor error READ error NOTIFY colorsChanged)
+    Q_PROPERTY(QColor onError READ onError NOTIFY colorsChanged)
+    Q_PROPERTY(QColor errorContainer READ errorContainer NOTIFY colorsChanged)
+    Q_PROPERTY(QColor onErrorContainer READ onErrorContainer NOTIFY colorsChanged)
+
     Q_PROPERTY(bool isDark READ isDark WRITE setIsDark NOTIFY isDarkChanged)
 
     public : explicit MaterialColorGenerator(QObject* parent = nullptr);
@@ -69,6 +84,22 @@ class MaterialColorGenerator : public QObject {
     QColor background() const { return m_background; }
     QColor onBackground() const { return m_onBackground; }
 
+    QColor surfaceVariant() const { return m_surfaceVariant; }
+    QColor onSurfaceVariant() const { return m_onSurfaceVariant; }
+    QColor inverseSurface() const { return m_inverseSurface; }
+    QColor inverseOnSurface() const { return m_inverseOnSurface; }
+    QColor outline() const { return m_outline; }
+    QColor outlineVariant() const { return m_outlineVariant; }
+    QColor surfaceTint() const { return m_surfaceTint; }
+    QColor inversePrimary() const { return m_inversePrimary; }
+
+    QColor error() const { return m_error; }
+    QColor onError() const { return m_onError; }
+    QColor errorContainer() const { return m_errorContainer; }
+    QColor onErrorContainer() const { return m_onErrorContainer; }
+
+    // int colorCount() const { return m_colorCount; }
+
    signals:
     void colorsChanged();
     void isDarkChanged();
@@ -84,4 +115,9 @@ class MaterialColorGenerator : public QObject {
     QColor m_secondary, m_onSecondary, m_secondaryContainer, m_onSecondaryContainer;
     QColor m_tertiary, m_onTertiary, m_tertiaryContainer, m_onTertiaryContainer;
     QColor m_surface, m_onSurface, m_background, m_onBackground;
+
+    QColor m_surfaceVariant, m_onSurfaceVariant, m_inverseSurface, m_inverseOnSurface;
+    QColor m_outline, m_outlineVariant, m_surfaceTint, m_inversePrimary;
+
+    QColor m_error, m_onError, m_errorContainer, m_onErrorContainer;
 };

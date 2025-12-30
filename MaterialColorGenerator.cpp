@@ -104,5 +104,20 @@ void MaterialColorGenerator::updateTheme() {
     m_background = toQColor(MaterialDynamicColors::Background().GetArgb(scheme));
     m_onBackground = toQColor(MaterialDynamicColors::OnBackground().GetArgb(scheme));
 
+    // Additional dynamic colors
+    m_surfaceVariant = toQColor(MaterialDynamicColors::SurfaceVariant().GetArgb(scheme));
+    m_onSurfaceVariant = toQColor(MaterialDynamicColors::OnSurfaceVariant().GetArgb(scheme));
+    m_inverseSurface = toQColor(MaterialDynamicColors::InverseSurface().GetArgb(scheme));
+    m_inverseOnSurface = toQColor(MaterialDynamicColors::InverseOnSurface().GetArgb(scheme));
+    m_outline = toQColor(MaterialDynamicColors::Outline().GetArgb(scheme));
+    m_outlineVariant = toQColor(MaterialDynamicColors::OutlineVariant().GetArgb(scheme));
+    m_surfaceTint = toQColor(MaterialDynamicColors::SurfaceTint().GetArgb(scheme));
+    m_inversePrimary = toQColor(MaterialDynamicColors::InversePrimary().GetArgb(scheme));
+
+    m_error = toQColor(MaterialDynamicColors::Error().GetArgb(scheme));
+    m_onError = toQColor(MaterialDynamicColors::OnError().GetArgb(scheme));
+    m_errorContainer = toQColor(MaterialDynamicColors::ErrorContainer().GetArgb(scheme));
+    m_onErrorContainer = toQColor(MaterialDynamicColors::OnErrorContainer().GetArgb(scheme));
+
     emit colorsChanged();
 }
