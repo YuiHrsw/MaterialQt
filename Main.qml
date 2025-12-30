@@ -1,7 +1,11 @@
+pragma ComponentBehavior: Bound
+
 import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls
 import QtQuick.Dialogs
+import QtQuick.Controls.Material
+import QtQuick.Effects
 
 import M3Tools 
 
@@ -9,10 +13,9 @@ ApplicationWindow {
     width: 800
     height: 700
     visible: true
-    title: "M3 Generator (Native C++)"
+    title: "Material Color Generator"
     color: generator.background
 
-    // 实例化 C++ 类
     MaterialColorGenerator {
         id: generator
         isDark: switchDark.checked
@@ -27,16 +30,30 @@ ApplicationWindow {
             Layout.fillWidth: true
             Layout.preferredHeight: 240
             
-            color: generator.surface
+            color: generator.surfaceVariant
+            radius: 32
             
-            radius: 16
-            clip: true 
+            Rectangle {
+                id: maskRect
+                anchors.fill: parent
+                radius: 24
+                visible: false
+                layer.enabled: true
+            }
 
             Image {
                 id: imgPreview
                 anchors.fill: parent
                 visible: true 
                 fillMode: Image.PreserveAspectCrop
+                
+                layer.enabled: status === Image.Ready
+                layer.effect: MultiEffect {
+                    maskEnabled: true
+                    maskSource: maskRect
+                    maskThresholdMin: 0.5
+                    maskSpreadAtMin: 1
+                }
             }
             
             Label {
@@ -54,11 +71,14 @@ ApplicationWindow {
 
         RowLayout {
             Label { text: "Dark Mode"; color: generator.onBackground }
-            Switch { id: switchDark }
+            Switch { 
+                id: switchDark
+                Material.accent: generator.primary
+                Layout.alignment: Qt.AlignRight
+                Material.theme: switchDark.checked ? Material.Dark : Material.Light
+             }
         }
 
-        // 颜色展示：四个色系（Primary / Secondary / Tertiary / Error）
-        // 每个色系展示：OnColor, Color, ColorContainer, OnColorContainer
         ScrollView {
             Layout.fillWidth: true
             Layout.fillHeight: true
@@ -69,6 +89,7 @@ ApplicationWindow {
                 spacing: 12
 
                 component ColorBox: Rectangle {
+                    id: colorBox
                     property string title
                     property color c
                     property color txtC
@@ -76,10 +97,10 @@ ApplicationWindow {
                     implicitWidth: 160
                     height: 72
                     color: c
-                    radius: 8
+                    radius: 16
                     border.color: Qt.darker(c, 1.02)
                     Text { 
-                        text: title; color: txtC; 
+                        text: colorBox.title; color: colorBox.txtC; 
                         anchors.left: parent.left; anchors.leftMargin: 10; anchors.verticalCenter: parent.verticalCenter;
                         font.bold: true
                     }
