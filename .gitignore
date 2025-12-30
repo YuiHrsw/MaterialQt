@@ -1,2 +1,5 @@
 build
 .cache
+.qtcreator
+.qmlls.ini
+.DS_Store
